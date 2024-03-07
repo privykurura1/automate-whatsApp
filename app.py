@@ -33,7 +33,7 @@ def reply():
 
         if option == 1:
             res.message(
-                "You can contact us through phone or e-mail.\n\n*Phone*: 991234 56789 \n*E-mail* : contact@theredvelvet.io")
+                "You can contact us through phone or e-mail.\n\n*Phone*: 0778111517 \n*E-mail* : engineer@mpkcomteck.com")
         elif option == 2:
             res.message("You have entered *ordering mode*.")
             users.update_one(
@@ -46,7 +46,7 @@ def reply():
 
         elif option == 4:
             res.message(
-                "We have multiple stores across. Our main center is at *4/54, New Delhi*")
+                "We are in Gweru , Zimbabwe. Check our portfolio at *mpkcomteck.com* , or at *mpkcomteck.co.zw*")
         else:
             res.message("Please enter a valid response")
     elif user["status"] == "ordering":
@@ -59,7 +59,7 @@ def reply():
             users.update_one(
                 {"number": number}, {"$set": {"status": "main"}})
             res.message("You can choose from one of the options below: "
-                        "\n\n*Type*\n\n 1️⃣ To *contact* us \n 2️⃣ To *order* snacks \n 3️⃣ To know our *working hours* \n 4️⃣ "
+                        "\n\n*Type*\n\n 1️⃣ To *contact* us \n 2️⃣ To *order* our products \n 3️⃣ To know our *working hours* \n 4️⃣ "
                         "To get our *address*")
         elif 1 <= option <= 9:
             cakes = ["Mobile App Develoment", "Buy my Book", "School Management System",
@@ -70,19 +70,19 @@ def reply():
             users.update_one(
                 {"number": number}, {"$set": {"item": selected}})
             res.message("Excellent choice 😉")
-            res.message("Please enter your address to confirm the order")
+            res.message("Please enter your location to proceed")
         else:
             res.message("Please enter a valid response")
     elif user["status"] == "address":
         selected = user["item"]
         res.message("Thanks for shopping with us 😊")
-        res.message(f"Your order for *{selected}* has been received and will be delivered within an hour")
+        res.message(f"Your request for *{selected}* has been received and will respond within an hour")
         orders.insert_one({"number": number, "item": selected, "address": text, "order_time": datetime.now()})
         users.update_one(
             {"number": number}, {"$set": {"status": "ordered"}})
     elif user["status"] == "ordered":
         res.message("Hi, thanks for contacting again.\nYou can choose from one of the options below: "
-                    "\n\n*Type*\n\n 1️⃣ To *contact* us \n 2️⃣ To *order* snacks \n 3️⃣ To know our *working hours* \n 4️⃣ "
+                    "\n\n*Type*\n\n 1️⃣ To *contact* us \n 2️⃣ To *order* software products \n 3️⃣ To know our *working hours* \n 4️⃣ "
                     "To get our *address*")
         users.update_one(
             {"number": number}, {"$set": {"status": "main"}})

@@ -40,7 +40,7 @@ def reply():
                 {"number": number}, {"$set": {"status": "ordering"}})
             res.message(
                 "You can select one of the following services to order: \n\n1️⃣ Mobile App Develoment  \n2️⃣ Buy my Book \n3️⃣ School Management System"
-                "\n4️⃣ WhatsApp Bots \n5️⃣ Learn Programming \n6️⃣ Banking System \n7️⃣ Business website \n8️⃣ Portfilio \n9️⃣ E-commerce  \n0️⃣ Go Back")
+                "\n4️⃣ AI Bots \n5️⃣ Learn Programming \n6️⃣ Banking System \n7️⃣ Business website \n8️⃣ Portfilio \n9️⃣ E-commerce  \n0️⃣ Go Back")
         elif option == 3:
             res.message("We work from *9 a.m. to 5 p.m*.")
 
@@ -59,11 +59,11 @@ def reply():
             users.update_one(
                 {"number": number}, {"$set": {"status": "main"}})
             res.message("You can choose from one of the options below: "
-                        "\n\n*Type*\n\n 1️⃣ To *contact* us \n 2️⃣ To *order* our products \n 3️⃣ To know our *working hours* \n 4️⃣ "
+                        "\n\n*Type*\n\n 1️⃣ To *contact* us \n 2️⃣ To *order* our software products \n 3️⃣ To know our *working hours* \n 4️⃣ "
                         "To get our *address*")
         elif 1 <= option <= 9:
             cakes = ["Mobile App Develoment", "Buy my Book", "School Management System",
-                     "WhatsApp Bots ", "Learn Programming", "Banking System", "Business website", "Portfilio", "E-commerce"]
+                     "AI Bots ", "Learn Programming", "Banking System", "Business website", "Portfilio", "E-commerce"]
             selected = cakes[option - 1]
             users.update_one(
                 {"number": number}, {"$set": {"status": "address"}})
@@ -75,7 +75,7 @@ def reply():
             res.message("Please enter a valid response")
     elif user["status"] == "address":
         selected = user["item"]
-        res.message("Thanks for shopping with us 😊")
+        res.message("Thanks for reaching us 😊")
         res.message(f"Your request for *{selected}* has been received and will respond within an hour")
         orders.insert_one({"number": number, "item": selected, "address": text, "order_time": datetime.now()})
         users.update_one(
